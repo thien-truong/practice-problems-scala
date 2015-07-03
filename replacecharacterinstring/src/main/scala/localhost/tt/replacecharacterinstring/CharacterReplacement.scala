@@ -21,6 +21,18 @@ class CharacterReplacement {
     resultingString.toString()
   }
 
+  def replaceCharacterUsingCollectionPipeline(stringToBeAltered: String,
+                                              characterToBeReplaced: Char,
+                                              newCharacter: Char): String = {
+    stringToBeAltered.map { character => {
+      if (character == characterToBeReplaced) {
+        newCharacter
+      } else {
+        character
+      }
+    }}
+  }
+
 }
 
 

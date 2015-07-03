@@ -19,5 +19,14 @@ class CharacterReplacementTest extends FunSpec with Matchers{
         characterReplacement.replaceCharacterUsingIteration("Bunster has 3 toes", 's', 'b')
       resultingString shouldBe expectedString
     }
+
+    it("replaces all occurrences of a character with another character in a string using collection pipeline") {
+      val characterReplacement = new CharacterReplacement()
+      val expectedString: String = "Funky bunvee jumpinv"
+      val resultingString: String =
+        characterReplacement.replaceCharacterUsingCollectionPipeline("Funky bungee jumping", 'g', 'v')
+      resultingString shouldBe expectedString
+    }
+
   }
 }
