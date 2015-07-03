@@ -7,6 +7,20 @@ class CharacterReplacement {
     stringToBeAltered.replace('o', 'i')
   }
 
+  def replaceCharacterUsingIteration(stringToBeAltered: String,
+                                     characterToBeReplaced: Char,
+                                     newCharacter: Char): String = {
+    val resultingString = new StringBuilder()
+    for (character <- stringToBeAltered) {
+      if (character == characterToBeReplaced) {
+        resultingString.append(newCharacter)
+      } else {
+        resultingString.append(character)
+      }
+    }
+    resultingString.toString()
+  }
+
 }
 
 
