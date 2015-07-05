@@ -2,7 +2,7 @@ package localhost.tt.replacecharacterinstring
 
 import org.scalatest.{FunSpec, Matchers}
 
-class CharacterReplacementTest extends FunSpec with Matchers{
+class CharacterReplacementTest extends FunSpec with Matchers {
   describe("CharacterReplacement") {
     it("replaces all occurrences of a character with another character in a string using String's replace method") {
       val characterReplacement = new CharacterReplacement()
