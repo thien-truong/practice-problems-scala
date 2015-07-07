@@ -22,14 +22,23 @@ case class MyLinkedList(var head: Option[Node]) {
     head match {
       case Some(head) =>
         var currentNode: Node = head
-        if (currentNode.next == None) {
-          var nodeToInsert = Node(value, None)
-          currentNode.next = Some(nodeToInsert)
-        } else {
-          currentNode = currentNode.next.get
+        traverseAndInsert(currentNode)
+//        if (currentNode.next == None) {
+//          var nodeToInsert = Node(value, None)
+//          currentNode.next = Some(nodeToInsert)
+//        } else {
+//          currentNode = currentNode.next.get
+//          if (currentNode.next == None) {
+//            var nodeToInsert = Node(value, None)
+//            currentNode.next = Some(nodeToInsert)
+//          }
+//        }
+        def traverseAndInsert(currentNode: Node): Unit = {
           if (currentNode.next == None) {
             var nodeToInsert = Node(value, None)
             currentNode.next = Some(nodeToInsert)
+          } else {
+            traverseAndInsert(currentNode.next.get)
           }
         }
       case None =>
