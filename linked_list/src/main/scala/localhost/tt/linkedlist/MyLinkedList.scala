@@ -5,52 +5,29 @@ case class MyLinkedList(var head: Option[Node]) {
 
   def insert(index: Int, value: String): Unit = {
 
-//    if (head.isEmpty) {
-//      head = Some(Node(value, None))
-//    } else {
-//      head = this.head
-//      var currentNode: Node = head.get
-//      for (numberOfElement <- 0 until index) {
-//        currentNode = currentNode.next.get
-//        if (currentNode.next == None) {
-//          var nodeToInsert: Node = Node(value, None)
-//          currentNode = nodeToInsert
-//        }
-//      }
-//    }
-
     head match {
-      case Some(head) =>
-        var currentNode: Node = head
-        var count: Int = 1
-        traverseAndInsert(currentNode, count)
+      case Some(head0) =>
+        val currentNode: Node = head0
+        val count: Int = 1
+
+        if (index == 0) {
+          val nodeToInsert = Node(value, Some(currentNode))
+          head = Some(nodeToInsert)
+        } else {
+          traverseAndInsert(currentNode, count)
+        }
 
         def traverseAndInsert(currentNode: Node, count: Int): Unit = {
           if (currentNode.next == None) {
-            var nodeToInsert = Node(value, None)
+            val nodeToInsert = Node(value, None)
             currentNode.next = Some(nodeToInsert)
           } else if (count == index) {
-            var nodeToInsert = Node(value, currentNode.next)
+            val nodeToInsert = Node(value, currentNode.next)
             currentNode.next = Some(nodeToInsert)
           } else {
             traverseAndInsert(currentNode.next.get, count + 1)
           }
         }
-
-//          if (currentNode.next == None) {
-//            var nodeToInsert = Node(value, None)
-//            currentNode.next = Some(nodeToInsert)
-//          } else if (count == index) {
-//            var nodeToInsert = Node(value, currentNode.next)
-//            currentNode.next = Some(nodeToInsert)
-//          } else {
-//            currentNode = currentNode.next.get
-//            count = count + 1
-//            if (currentNode.next == None) {
-//              var nodeToInsert = Node(value, None)
-//              currentNode.next = Some(nodeToInsert)
-//            }
-//          }
 
       case None =>
         head = Some(Node(value, None))
