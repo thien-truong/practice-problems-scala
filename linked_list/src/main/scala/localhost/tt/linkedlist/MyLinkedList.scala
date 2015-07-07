@@ -22,25 +22,36 @@ case class MyLinkedList(var head: Option[Node]) {
     head match {
       case Some(head) =>
         var currentNode: Node = head
-        traverseAndInsert(currentNode)
-//        if (currentNode.next == None) {
-//          var nodeToInsert = Node(value, None)
-//          currentNode.next = Some(nodeToInsert)
-//        } else {
-//          currentNode = currentNode.next.get
-//          if (currentNode.next == None) {
-//            var nodeToInsert = Node(value, None)
-//            currentNode.next = Some(nodeToInsert)
-//          }
-//        }
-        def traverseAndInsert(currentNode: Node): Unit = {
+        var count: Int = 1
+        traverseAndInsert(currentNode, count)
+
+        def traverseAndInsert(currentNode: Node, count: Int): Unit = {
           if (currentNode.next == None) {
             var nodeToInsert = Node(value, None)
             currentNode.next = Some(nodeToInsert)
+          } else if (count == index) {
+            var nodeToInsert = Node(value, currentNode.next)
+            currentNode.next = Some(nodeToInsert)
           } else {
-            traverseAndInsert(currentNode.next.get)
+            traverseAndInsert(currentNode.next.get, count + 1)
           }
         }
+
+//          if (currentNode.next == None) {
+//            var nodeToInsert = Node(value, None)
+//            currentNode.next = Some(nodeToInsert)
+//          } else if (count == index) {
+//            var nodeToInsert = Node(value, currentNode.next)
+//            currentNode.next = Some(nodeToInsert)
+//          } else {
+//            currentNode = currentNode.next.get
+//            count = count + 1
+//            if (currentNode.next == None) {
+//              var nodeToInsert = Node(value, None)
+//              currentNode.next = Some(nodeToInsert)
+//            }
+//          }
+
       case None =>
         head = Some(Node(value, None))
     }
