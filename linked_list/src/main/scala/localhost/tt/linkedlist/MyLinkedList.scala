@@ -25,6 +25,12 @@ case class MyLinkedList(var head: Option[Node]) {
         if (currentNode.next == None) {
           var nodeToInsert = Node(value, None)
           currentNode.next = Some(nodeToInsert)
+        } else {
+          currentNode = currentNode.next.get
+          if (currentNode.next == None) {
+            var nodeToInsert = Node(value, None)
+            currentNode.next = Some(nodeToInsert)
+          }
         }
       case None =>
         head = Some(Node(value, None))
