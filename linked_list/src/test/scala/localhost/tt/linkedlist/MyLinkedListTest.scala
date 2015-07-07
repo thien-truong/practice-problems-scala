@@ -10,5 +10,12 @@ class MyLinkedListTest extends FunSpec with Matchers {
       linkedList.insert(0, "a")
       linkedList shouldBe expectedLinkedList
     }
+
+    it("inserts an element into the end of a list"){
+      val linkedList = MyLinkedList("a")
+      val expectedLinkedList = MyLinkedList("a", "b")
+      linkedList.insert(1, "b")
+      linkedList shouldBe expectedLinkedList
+    }
   }
 }
