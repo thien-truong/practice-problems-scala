@@ -5,34 +5,37 @@ case class MyLinkedList(var head: Option[Node]) {
 
   def insert(index: Int, value: String): Unit = {
 
+    def traverseAndInsert(currentNode: Node, currentIndex: Int): Unit = {
+      (currentNode.next.isEmpty, currentIndex == index) match {
+        case (true, false) =>
+          throw new IllegalArgumentException("Index is out of bounds.")
+        case (true, true) =>
+          val nodeToInsert = Node(value, None)
+          currentNode.next = Some(nodeToInsert)
+        case (false, true) =>
+          val nodeToInsert = Node(value, currentNode.next)
+          currentNode.next = Some(nodeToInsert)
+        case (false, false) =>
+          traverseAndInsert(currentNode.next.get, currentIndex + 1)
+      }
+    }
+
     head match {
-      case Some(head0) =>
-        val currentNode: Node = head0
-        val count: Int = 1
+      case Some(currentNode) =>
+        val currentIndex: Int = 1
 
         if (index == 0) {
           val nodeToInsert = Node(value, Some(currentNode))
           head = Some(nodeToInsert)
         } else {
-          traverseAndInsert(currentNode, count)
-        }
-
-        def traverseAndInsert(currentNode: Node, count: Int): Unit = {
-          if (currentNode.next == None) {
-            val nodeToInsert = Node(value, None)
-            currentNode.next = Some(nodeToInsert)
-          } else if (count == index) {
-            val nodeToInsert = Node(value, currentNode.next)
-            currentNode.next = Some(nodeToInsert)
-          } else {
-            traverseAndInsert(currentNode.next.get, count + 1)
-          }
+          traverseAndInsert(currentNode, currentIndex)
         }
 
       case None =>
         head = Some(Node(value, None))
     }
   }
+
 }
 
 object MyLinkedList {

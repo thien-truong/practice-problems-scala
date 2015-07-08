@@ -38,5 +38,12 @@ class MyLinkedListTest extends FunSpec with Matchers {
       linkedList.insert(0, "d")
       linkedList shouldBe expectedLinkedList
     }
+
+    it("throws an exception if the element to be inserted is out of bounds") {
+      val linkedList = MyLinkedList("a", "b")
+      intercept[IllegalArgumentException] {
+        linkedList.insert(3, "c")
+      }
+    }
   }
 }
