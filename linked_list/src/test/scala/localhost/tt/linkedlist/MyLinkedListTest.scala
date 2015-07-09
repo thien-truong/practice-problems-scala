@@ -45,5 +45,14 @@ class MyLinkedListTest extends FunSpec with Matchers {
         linkedList.insert(3, "c")
       }
     }
+
+    it("removes an element at an index when the list has one element") {
+      val linkedList = MyLinkedList("a")
+      val expectedLinkedList = MyLinkedList()
+      linkedList.remove(0)
+      linkedList shouldBe expectedLinkedList
+    }
+
+
   }
 }

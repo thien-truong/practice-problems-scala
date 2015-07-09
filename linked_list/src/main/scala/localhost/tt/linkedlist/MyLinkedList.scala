@@ -2,6 +2,18 @@ package localhost.tt.linkedlist
 
 // a linked list is always initiated with a HEAD
 case class MyLinkedList(var head: Option[Node]) {
+  def remove(index: Int): Unit = {
+    head match {
+      case None =>
+        throw new IllegalArgumentException("Linked list is empty.")
+      case Some(currentNode) =>
+        val currentIndex = 0
+        if (index == 0 && currentNode.next.isEmpty) {
+          head = None
+        }
+    }
+  }
+
 
   def insert(index: Int, value: String): Unit = {
 
