@@ -20,5 +20,16 @@ class VendingMachineInventorySpec extends FunSpec with Matchers {
       vendingMachineInventory.merchandiseInventory shouldBe expectedInventory
 
     }
+
+    it("removes items with merchandise-code C") {
+      val vendingMachineInventory = VendingMachineInventory()
+      vendingMachineInventory.addMerchandise("A", 2)
+      vendingMachineInventory.addMerchandise("C", 3)
+      vendingMachineInventory.addMerchandise("A", 3)
+      vendingMachineInventory.removeMerchandise("C")
+      val expectedInventory = Map("A" -> 5)
+      vendingMachineInventory.merchandiseInventory shouldBe expectedInventory
+    }
+
   }
 }

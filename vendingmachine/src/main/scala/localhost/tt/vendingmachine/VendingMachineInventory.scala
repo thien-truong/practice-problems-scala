@@ -3,6 +3,7 @@ package localhost.tt.vendingmachine
 import scala.collection.mutable
 
 case class VendingMachineInventory() {
+
   var merchandiseInventory = mutable.HashMap.empty[String, Int]
   var monetaryBalance: Double = 0.0
 
@@ -17,6 +18,10 @@ case class VendingMachineInventory() {
       merchandiseInventory += (merchandiseCode -> quantity)
     }
 
+  }
+
+  def removeMerchandise(merchandiseCode: String): Unit = {
+    merchandiseInventory.remove(merchandiseCode)
   }
 
 }
