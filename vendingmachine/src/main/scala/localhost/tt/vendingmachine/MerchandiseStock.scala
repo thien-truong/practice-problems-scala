@@ -1,5 +1,5 @@
 package localhost.tt.vendingmachine
 
-case class MerchandiseStock(merchandise: Merchandise, quantity: Int ) {
-  def addQuantity(quantity: Int): Unit = this.quantity + quantity
+case class MerchandiseStock(merchandise: Merchandise, var quantity: Int ) {
+  def addQuantity(quantity: Int) = {this.quantity += quantity}
 }
