@@ -3,14 +3,13 @@ package localhost.tt.vendingmachine
 import scala.collection.mutable
 
 case class VendingMachineAvailableMerchandise() {
-
   var availableMerchandise = mutable.HashMap.empty[String, MerchandiseStock]
   var monetaryBalance: Double = 30.0
 
   def addMerchandise(merchandiseCode: String, merchandise: Merchandise, quantity: Int): VendingMachineAvailableMerchandise = {
     val upperCasedMerchandiseCode: String = merchandiseCode.toUpperCase
 
-    if (availableMerchandise.contains(merchandiseCode)) {
+    if (availableMerchandise.contains(upperCasedMerchandiseCode)) {
       val merchandiseStock: MerchandiseStock = availableMerchandise.apply(merchandiseCode)
 
       if (merchandiseStock.merchandise != merchandise) {
@@ -27,13 +26,30 @@ case class VendingMachineAvailableMerchandise() {
     this
   }
 
-//  def reduceMerchandise(merchandiseCode: String, quantity: Int): Unit = {
-//
-//  }
+  def reduceMerchandise(merchandiseCode: String, quantity: Int): VendingMachineAvailableMerchandise = {
+    val upperCasedMerchandiseCode: String = merchandiseCode.toUpperCase
 
-//  def removeMerchandise(merchandiseCode: String): Unit = {
-//    availableMerchandise.remove(merchandiseCode)
-//  }
+    if (availableMerchandise.contains(upperCasedMerchandiseCode)) {
+      val merchandiseStock: MerchandiseStock = availableMerchandise.apply(merchandiseCode)
+      merchandiseStock.reduceQuantity(quantity)
+
+//      if (merchandiseStock.quantity < quantity) {
+//        throw new Ex
+//      }
+
+      if (merchandiseStock.quantity == 0) {
+        removeMerchandise(upperCasedMerchandiseCode)
+      }
+
+    }
+
+    this
+  }
+
+  def removeMerchandise(merchandiseCode: String): VendingMachineAvailableMerchandise = {
+    availableMerchandise.remove(merchandiseCode.toUpperCase)
+    this
+  }
 
 }
 
