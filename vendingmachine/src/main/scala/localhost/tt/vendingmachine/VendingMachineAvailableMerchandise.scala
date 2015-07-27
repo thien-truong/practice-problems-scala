@@ -3,10 +3,15 @@ package localhost.tt.vendingmachine
 import scala.collection.mutable
 
 case class VendingMachineAvailableMerchandise() {
+
   var availableMerchandise = mutable.HashMap.empty[String, MerchandiseStock]
   var monetaryBalance: Double = 30.0
 
-  def getMerchandise(merchandiseCode: String): Option[Unit] = {
+  def resetCashBalanceAfterPurchase(priceOfMerchandiseSold: Double): Unit = {
+    monetaryBalance += priceOfMerchandiseSold
+  }
+
+  def getMerchandise(merchandiseCode: String): Option[Merchandise] = {
 
     if (availableMerchandise.contains(merchandiseCode.toUpperCase)) {
       val merchandiseStock: MerchandiseStock = availableMerchandise.apply(merchandiseCode)
@@ -61,6 +66,16 @@ case class VendingMachineAvailableMerchandise() {
   def removeMerchandise(merchandiseCode: String): VendingMachineAvailableMerchandise = {
     availableMerchandise.remove(merchandiseCode.toUpperCase)
     this
+  }
+
+  def displayAvailableMerchandise(): Unit = {
+    println("Code      Name             Price      Quantity")
+    availableMerchandise.foreach{ case(key, value) => println(
+      f"$key%-9s " +
+      f"${value.merchandise.merchandiseName}%-9s " +
+      f"${value.merchandise.retailPrice}%11.2f " +
+      f"${value.quantity}%7d")
+    }
   }
 
 }
