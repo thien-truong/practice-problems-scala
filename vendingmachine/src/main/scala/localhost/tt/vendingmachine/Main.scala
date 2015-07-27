@@ -8,7 +8,18 @@ object Main {
       .addMerchandise("B", new Merchandise("Coca Cola", 0.75), 5)
       .addMerchandise("C", new Merchandise("Snicker", 2.00), 1)
     val consoleInterface = new VendingMachineConsoleInterface(availableMerchandise)
-    availableMerchandise.displayAvailableMerchandise()
-    consoleInterface.purchaseMerchandise()
+
+    var finishedVending: Boolean = false
+
+    while (!finishedVending) {
+      availableMerchandise.displayAvailableMerchandise()
+
+      try {
+        consoleInterface.purchaseMerchandise()
+      } catch {
+        case exception: FinishVendingException => finishedVending = true
+      }
+
+    }
   }
 }

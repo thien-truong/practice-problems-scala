@@ -58,6 +58,8 @@ case class VendingMachineConsoleInterface(availableMerchandise: VendingMachineAv
     val merchandiseCode: String = StdIn.readLine("Enter XX to quit. Otherwise enter the code " +
       "that corresponds to the drink you wish to purchase: ").toUpperCase
 
+    if (merchandiseCode.toUpperCase == "XX") throw new FinishVendingException
+
     val selectedMerchandise: Option[Merchandise] = availableMerchandise.getMerchandise(merchandiseCode)
 
     if (selectedMerchandise.nonEmpty) {
