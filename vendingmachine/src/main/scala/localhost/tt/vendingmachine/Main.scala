@@ -10,10 +10,5 @@ object Main {
     val consoleInterface = new VendingMachineConsoleInterface(availableMerchandise)
     availableMerchandise.displayAvailableMerchandise()
     consoleInterface.purchaseMerchandise()
-
-    println("Hello world!")
-    println(availableMerchandise.availableMerchandise.toString())
-    println(consoleInterface.availableMerchandise.availableMerchandise.toString())
-
   }
 }
