@@ -46,13 +46,14 @@ case class VendingMachineAvailableMerchandise() {
 
     if (availableMerchandise.contains(upperCasedMerchandiseCode)) {
       val merchandiseStock: MerchandiseStock = availableMerchandise.apply(merchandiseCode)
-      merchandiseStock.reduceQuantity(quantity)
 
       if (merchandiseStock.quantity < quantity) {
         throw new NegativeQuantityException(s"There are only ${merchandiseStock.quantity} items of " +
           s"merchandise code $upperCasedMerchandiseCode available. Reducing $quantity will result" +
           s"in negative inventory")
       }
+
+      merchandiseStock.reduceQuantity(quantity)
 
       if (merchandiseStock.quantity == 0) {
         removeMerchandise(upperCasedMerchandiseCode)
