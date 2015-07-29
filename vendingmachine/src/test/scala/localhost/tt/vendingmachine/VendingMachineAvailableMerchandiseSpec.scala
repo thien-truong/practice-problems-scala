@@ -32,6 +32,15 @@ class VendingMachineAvailableMerchandiseSpec extends FunSpec with Matchers {
       availableMerchandise.availableMerchandise shouldBe expectedAvailableMerchandise
     }
 
+    it("removes the merchandise entirely from available merchandise when quantity in stock is 0") {
+      val pepsi = new Merchandise("Pepsi", 2.75)
+      val coke = new Merchandise("Coke", 0.75)
+      val availableMerchandise = VendingMachineAvailableMerchandise()
+      val expectedAvailableMerchandise = Map("C" -> new MerchandiseStock(coke, 3))
+      availableMerchandise.addMerchandise("A", pepsi, 2).addMerchandise("C", coke, 3).reduceMerchandise("A", 2)
+      availableMerchandise.availableMerchandise shouldBe expectedAvailableMerchandise
+    }
+
     it("throws an exception when the quantity to reduce is greater than the quantity in stock") {
       val pepsi = new Merchandise("Pepsi", 2.75)
       val coke = new Merchandise("Coke", 0.75)

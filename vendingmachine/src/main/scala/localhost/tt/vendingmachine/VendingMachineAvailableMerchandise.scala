@@ -64,7 +64,7 @@ case class VendingMachineAvailableMerchandise() {
     this
   }
 
-  def removeMerchandise(merchandiseCode: String): VendingMachineAvailableMerchandise = {
+  private def removeMerchandise(merchandiseCode: String): VendingMachineAvailableMerchandise = {
     availableMerchandise.remove(merchandiseCode.toUpperCase)
     this
   }
